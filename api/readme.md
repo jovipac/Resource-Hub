@@ -18,10 +18,6 @@ Here is a list of the packages installed:
 
 To install the project you can use composer
 
-```bash
-composer create-project joselfonseca/laravel-api new-api
-```
-
 Then run `composer install` again and the error should be gone.
 
 Modify the .env file to suit your needs
