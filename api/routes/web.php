@@ -15,3 +15,8 @@ Route::get('/', function () {
 });
 
 Route::get('/docs', 'ApiDocsController@index');
+
+// Authentication Routes
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
