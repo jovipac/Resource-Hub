@@ -9,13 +9,13 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Support\FacebookLoginTrait as loginFacebook;
 /**
  * Class User.
  */
 class User extends Authenticatable
 {
-    use Notifiable, UuidScopeTrait, HasApiTokens, HasRoles, SoftDeletes, HasRolesUuid {
+    use Notifiable, UuidScopeTrait, HasApiTokens, HasRoles, SoftDeletes, HasRolesUuid, loginFacebook {
         HasRolesUuid::getStoredRole insteadof HasRoles;
     }
 
@@ -27,6 +27,8 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at',
     ];
+    
+    protected $casts = ['uuid' => 'string'];
 
     /**
      * The attributes that are mass assignable.

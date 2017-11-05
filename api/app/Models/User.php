@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
+use App\Support\UuidScopeTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,UuidScopeTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +27,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Find the user identified by the given $identifier.
+     *
+     * @param $identifier email|phone
+     * @return mixed
+     */
+    public function findForPassport($identifier) {
+        return User::orWhere('email', $identifier)->orWhere('name', $identifier)->first();
+    }
+
 }

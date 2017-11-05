@@ -20,11 +20,13 @@ trait HasPermissionsUuid
     protected function getStoredPermission($permissions): Permission
     {
         if (is_string($permissions)) {
-            return app(PermissionEntity::class)->where('name', $permissions)->orWhere('uuid', $permissions)->first();
+            return app(PermissionEntity::class)->where('name', $permissions)->first();
+          //return app(PermissionEntity::class)->where('name', $permissions)->orWhere('uuid', $permissions)->first();
         }
 
         if (is_array($permissions)) {
-            return app(PermissionEntity::class)->whereIn('name', $permissions)->orWhereIn('uuid', $permissions)->get();
+            return app(PermissionEntity::class)->whereIn('name', $permissions)->get();
+          //return app(PermissionEntity::class)->whereIn('name', $permissions)->orWhereIn('uuid', $permissions)->get();
         }
 
         return $permissions;

@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "barryvdh/laravel-cors": "^0.10.0",
+        "danjdewhurst/laravel-passport-facebook-login": "^1.4",
         "dingo/api": "1.0.*@dev",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",

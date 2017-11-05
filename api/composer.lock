@@ -4,51 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "280654bd485f9fa0cefdb73700cb545f",
+    "content-hash": "b7ffc5b7c9f0524ceb07c568052329f9",
     "packages": [
         {
-            "name": "barryvdh/laravel-cors",
-            "version": "v0.10.0",
+            "name": "danjdewhurst/laravel-passport-facebook-login",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/barryvdh/laravel-cors.git",
-                "reference": "1326460c591e5299d43e266de52a4141c5c66561"
+                "url": "https://github.com/danjdewhurst/Laravel-Passport-Facebook-Login.git",
+                "reference": "4a0e4fe53ccde7e39c3aa18caaa30e477c5fde86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-cors/zipball/1326460c591e5299d43e266de52a4141c5c66561",
-                "reference": "1326460c591e5299d43e266de52a4141c5c66561",
+                "url": "https://api.github.com/repos/danjdewhurst/Laravel-Passport-Facebook-Login/zipball/4a0e4fe53ccde7e39c3aa18caaa30e477c5fde86",
+                "reference": "4a0e4fe53ccde7e39c3aa18caaa30e477c5fde86",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.3.x|5.4.x|5.5.x",
-                "php": ">=5.5.9",
-                "symfony/http-foundation": "~3.1",
-                "symfony/http-kernel": "~3.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "3.x",
-                "phpunit/phpunit": "^4.8|^5.2",
-                "squizlabs/php_codesniffer": "^2.3"
+                "facebook/graph-sdk": "^5.6",
+                "laravel/passport": "^4.0"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "0.10-dev"
-                },
                 "laravel": {
                     "providers": [
-                        "Barryvdh\\Cors\\ServiceProvider"
+                        "Danjdewhurst\\PassportFacebookLogin\\FacebookLoginGrantProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Barryvdh\\Cors\\": "src/"
-                },
-                "classmap": [
-                    "tests"
-                ]
+                    "Danjdewhurst\\PassportFacebookLogin\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -56,18 +43,23 @@
             ],
             "authors": [
                 {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
+                    "name": "Jacob Morris",
+                    "email": "jacob@mirk.co"
+                },
+                {
+                    "name": "Daniel Dewhurst",
+                    "email": "danjdewhurst@gmail.com"
                 }
             ],
-            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application",
+            "description": "Facebook Token Request Grant for Laravel Passport",
             "keywords": [
-                "api",
-                "cors",
-                "crossdomain",
-                "laravel"
+                "grant",
+                "laravel",
+                "lumen",
+                "oauth",
+                "passport"
             ],
-            "time": "2017-08-28T12:10:56+00:00"
+            "time": "2017-10-31T10:25:26+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -582,6 +574,64 @@
                 "parser"
             ],
             "time": "2017-05-14T14:47:48+00:00"
+        },
+        {
+            "name": "facebook/graph-sdk",
+            "version": "5.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/php-graph-sdk.git",
+                "reference": "2f9639c15ae043911f40ffe44080b32bac2c5280"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2f9639c15ae043911f40ffe44080b32bac2c5280",
+                "reference": "2f9639c15ae043911f40ffe44080b32bac2c5280",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~5.0",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/Facebook/"
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Facebook Platform"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/facebook/php-graph-sdk",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "time": "2017-08-16T17:28:07+00:00"
         },
         {
             "name": "fideloper/proxy",
