@@ -178,7 +178,8 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-        Danjdewhurst\PassportFacebookLogin\FacebookLoginGrantProvider::class,
+        Danjdewhurst\PassportFacebookLogin\FacebookLoginGrantProvider::class,        
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         /*
          * Application Service Providers...
          */

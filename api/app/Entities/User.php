@@ -15,7 +15,9 @@ use App\Support\FacebookLoginTrait as loginFacebook;
  */
 class User extends Authenticatable
 {
-    use Notifiable, UuidScopeTrait, HasApiTokens, HasRoles, SoftDeletes, HasRolesUuid, loginFacebook {
+    use Notifiable, UuidScopeTrait, HasApiTokens, HasRoles, SoftDeletes, HasRolesUuid, 
+        loginFacebook 
+    {
         HasRolesUuid::getStoredRole insteadof HasRoles;
     }
 
@@ -40,6 +42,8 @@ class User extends Authenticatable
         'uuid',
         'email',
         'password',
+        'first_name',
+        'last_name',
     ];
 
     /**
@@ -51,6 +55,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
 
     /**
      * @param array $attributes
@@ -66,4 +71,40 @@ class User extends Authenticatable
 
         return $model;
     }
+
+    /**
+     *  Add the one to many relationship to profiles into the User model:
+     * @return profile
+     */
+    public function profiles()
+    {
+        return $this->hasMany('App\Entities\Profile');
+    }
+
+    /**
+     * Verify if exists profile for the user.
+     *
+     * @return boolean
+     */
+    public function hasProfile($name)
+    {
+        foreach ($this->profiles as $profile) {
+            if ($profile->name == $name) {
+                return true;
+            }
+        }
+
+        return false;
+    }  
+
+    public function assignProfile($profile)
+    {
+        return $this->profiles()->attach($profile);
+    }
+
+    public function removeProfile($profile)
+    {
+        return $this->profiles()->detach($profile);
+    }
+
 }

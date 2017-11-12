@@ -49,7 +49,7 @@ trait FacebookLoginTrait {
                 $user = $userModel::where('email', $fbUser['email'])->first();
                 if (!$user) {
                     $user = new $userModel();
-                    $user->facebook_id = $fbUser['id'];
+                    $user->remember_token = $fbUser['id'];
                     $user->first_name = $fbUser['first_name'];
                     $user->last_name = $fbUser['last_name'];
                     $user->email = $fbUser['email'];
@@ -58,10 +58,10 @@ trait FacebookLoginTrait {
 
                     /**
                      * Attach a role to the user.
-                     */
-                    if(!is_null(config('facebook.registration.attach_role'))) {
-                        $user->attachRole(config('facebook.registration.attach_role'));
-                    }
+                    * if(!is_null(config('facebook.registration.attach_role'))) {
+                    *    $user->attachRole(config('facebook.registration.attach_role'));
+                    * }
+                    */
                 }                
 
                 return $user;

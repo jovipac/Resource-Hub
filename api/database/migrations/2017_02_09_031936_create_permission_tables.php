@@ -55,7 +55,7 @@ class CreatePermissionTables extends Migration
             $table->primary(['role_id', 'model_id', 'model_type']);
         });
 
-        Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
+        Schema::create($tableNames['permissions_role'], function (Blueprint $table) use ($tableNames) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
