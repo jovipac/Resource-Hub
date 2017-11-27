@@ -8,6 +8,8 @@ $api->version('v1', function($api){
 
         $api->get('ping', 'Api\PingController@index');
 
+        $api->get('/facebook/callback', 'Api\FacebookController@handleProviderCallback');       
+
         $api->group(['middleware' => ['auth:api'], ], function ($api) {
 
             $api->group(['prefix' => 'users'], function ($api) {

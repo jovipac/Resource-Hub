@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use App\Support\UuidScopeTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Facebook\GraphNodes\GraphNode;
 use SammyK\LaravelFacebookSdk\SyncableGraphNodeTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, UuidScopeTrait, SyncableGraphNodeTrait;
+    use Notifiable, UuidScopeTrait, HasRoles, SyncableGraphNodeTrait;
 
     /**
      * The attributes that are mass assignable.

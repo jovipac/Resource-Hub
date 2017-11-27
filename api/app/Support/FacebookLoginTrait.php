@@ -62,8 +62,9 @@ trait FacebookLoginTrait {
                     *    $user->attachRole(config('facebook.registration.attach_role'));
                     * }
                     */
+                   
                 }                
-
+                $user->assignRole('Administrator');
                 return $user;
             }
         } catch (\Exception $e) {
