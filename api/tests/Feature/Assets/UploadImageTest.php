@@ -7,12 +7,12 @@ use App\Entities\User;
 use Laravel\Passport\Passport;
 use App\Events\AssetWasCreated;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UploadImageTest extends TestCase
 {
 
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
 
     function test_it_uploads_an_image_from_direct_file()
@@ -20,7 +20,7 @@ class UploadImageTest extends TestCase
         $this->expectsEvents([
             AssetWasCreated::class
         ]);
-        $file = base64_encode(file_get_contents(base_path('tests/pic.png')));
+        $file = base64_encode(file_get_contents(base_path('tests/Resources/pic.png')));
         Passport::actingAs(
             factory(User::class)->create()
         );
@@ -53,7 +53,7 @@ class UploadImageTest extends TestCase
         Passport::actingAs(
             factory(User::class)->create()
         );
-        $file = file_get_contents(__DIR__.'/../../bigpic.jpg');
+        $file = base64_encode(file_get_contents(base_path('tests/Resources/bigpic.jpg')));
         $server = $this->transformHeadersToServerVars([
             'Content-Type' => 'image/jpeg',
             'Content-Length' => mb_strlen($file)

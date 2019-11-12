@@ -8,14 +8,14 @@ use App\Entities\Role;
 use App\Entities\Permission;
 use Laravel\Passport\Passport;
 use Spatie\Permission\PermissionRegistrar;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RolesEndpointsTest extends TestCase
 {
 
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
-    function setUp()
+    function setUp() : void
     {
         parent::setUp();
         $this->installApp();
