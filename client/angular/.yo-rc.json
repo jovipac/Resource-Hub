@@ -1,0 +1,39 @@
+{
+  "generator-ngx-rocket": {
+    "version": "7.0.2",
+    "props": {
+      "location": "path",
+      "strict": false,
+      "skipInstall": false,
+      "skipQuickstart": false,
+      "initGit": true,
+      "appName": "Daily  Basis",
+      "target": [
+        "web",
+        "cordova"
+      ],
+      "pwa": true,
+      "mobile": [
+        "ios",
+        "android"
+      ],
+      "ui": "bootstrap",
+      "auth": true,
+      "lazy": true,
+      "angulartics": true,
+      "analyticsProvider": "ga",
+      "googleAnalyticsAccount": "UA-123456789-0",
+      "tools": [
+        "prettier",
+        "hads"
+      ],
+      "utility": [
+        "ramda",
+        "moment"
+      ],
+      "projectName": "daily-basis",
+      "packageManager": "npm",
+      "desktop": []
+    }
+  }
+}
