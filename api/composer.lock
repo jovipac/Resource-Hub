@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23f0cd42df07a8f9ef2b5e9f1e5383cc",
+    "content-hash": "390ed32fd3ce9043dd7a7a705289a5df",
     "packages": [
+        {
+            "name": "danjdewhurst/laravel-passport-facebook-login",
+            "version": "2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danjdewhurst/Laravel-Passport-Facebook-Login.git",
+                "reference": "454a89d5dcedd1975c5760fd7c9832e9e3ec5016"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danjdewhurst/Laravel-Passport-Facebook-Login/zipball/454a89d5dcedd1975c5760fd7c9832e9e3ec5016",
+                "reference": "454a89d5dcedd1975c5760fd7c9832e9e3ec5016",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/graph-sdk": "^5.6",
+                "laravel/passport": "^5.0||^6.0||^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Danjdewhurst\\PassportFacebookLogin\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Morris",
+                    "email": "jacob@mirk.co"
+                },
+                {
+                    "name": "Daniel Dewhurst",
+                    "email": "danjdewhurst@gmail.com"
+                }
+            ],
+            "description": "Facebook Token Request Grant for Laravel Passport",
+            "keywords": [
+                "grant",
+                "laravel",
+                "lumen",
+                "oauth",
+                "passport"
+            ],
+            "time": "2018-08-25T16:09:11+00:00"
+        },
         {
             "name": "defuse/php-encryption",
             "version": "v2.2.1",
@@ -594,6 +642,64 @@
                 "parser"
             ],
             "time": "2019-03-17T18:48:37+00:00"
+        },
+        {
+            "name": "facebook/graph-sdk",
+            "version": "5.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/php-graph-sdk.git",
+                "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+                "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~5.0",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/Facebook/"
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Facebook Platform"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/facebook/php-graph-sdk",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "time": "2018-12-11T22:56:31+00:00"
         },
         {
             "name": "fideloper/proxy",

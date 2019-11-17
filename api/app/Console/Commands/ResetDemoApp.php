@@ -39,7 +39,9 @@ class ResetDemoApp extends Command
         $this->call('passport:install');
         $this->info('Installing the app');
         $service->installApp([
-            'name' => 'Api Demo Admin',
+            'name' => 'superadmin',
+            'first_name' => 'Api Demo',
+            'last_name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => 'secret123456789',
             'password_confirmation' => 'secret123456789',

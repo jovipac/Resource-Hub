@@ -8,7 +8,7 @@ $api->version('v1', function($api){
 
         $api->get('ping', 'Api\PingController@index');
 
-        $api->get('/facebook/callback', 'Api\FacebookController@handleProviderCallback');       
+        $api->get('assets/{uuid}/render', 'Api\Assets\RenderFileController@show');
 
         $api->group(['middleware' => ['auth:api'], ], function ($api) {
 

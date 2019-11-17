@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -17,10 +19,12 @@ $factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'uuid' => $faker->uuid,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'remember_token' => Str::random(10),
     ];
 });
 
