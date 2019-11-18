@@ -2,13 +2,58 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ShellComponent } from './shell.component';
-import { HeaderComponent } from './header/header.component';
+import { AvatarModule } from 'ngx-avatar';
+
+// LAYOUT
+import { BaseLayoutComponent } from '../Layout/base-layout/base-layout.component';
+import { PagesLayoutComponent } from '../Layout/pages-layout/pages-layout.component';
+import { PageTitleComponent } from '../Layout/Components/page-title/page-title.component';
+
+// HEADER
+import { HeaderComponent } from '../Layout/Components/header/header.component';
+import { SearchBoxComponent } from '../Layout/Components/header/elements/search-box/search-box.component';
+import { UserBoxComponent } from '../Layout/Components/header/elements/user-box/user-box.component';
+
+// SIDEBAR
+import { SidebarComponent } from '../Layout/Components/sidebar/sidebar.component';
+import { LogoComponent } from '../Layout/Components/sidebar/elements/logo/logo.component';
+
+// FOOTER
+import { FooterComponent } from '../Layout/Components/footer/footer.component';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, NgbModule, RouterModule],
-  declarations: [HeaderComponent, ShellComponent]
+  imports: [
+    CommonModule,
+    TranslateModule,
+    NgbModule,
+    RouterModule,
+    // Angular Bootstrap Components
+    LoadingBarRouterModule,
+    PerfectScrollbarModule,
+    AngularFontAwesomeModule,
+    AvatarModule
+  ],
+  declarations: [
+    // LAYOUT
+    BaseLayoutComponent,
+    PagesLayoutComponent,
+    PageTitleComponent,
+    // HEADER
+    HeaderComponent,
+    SearchBoxComponent,
+    UserBoxComponent,
+    // SIDEBAR
+    SidebarComponent,
+    LogoComponent,
+    // FOOTER
+    FooterComponent,
+    ShellComponent
+  ]
 })
 export class ShellModule {}
