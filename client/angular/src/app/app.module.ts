@@ -21,9 +21,6 @@ import { environment } from '@env/environment';
 // BOOTSTRAP COMPONENTS
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
@@ -33,9 +30,6 @@ import { LoginModule } from './pages/login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 @NgModule({
   imports: [
     BrowserModule,
@@ -56,7 +50,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     // Angular Bootstrap Components
-    PerfectScrollbarModule,
     NgbModule,
     AngularFontAwesomeModule,
     FormsModule,
@@ -72,18 +65,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],
-  providers: [
-    Keyboard,
-    StatusBar,
-    SplashScreen,
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      // DROPZONE_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-      // DEFAULT_DROPZONE_CONFIG,
-    },
-    ConfigActions
-  ],
+  providers: [Keyboard, StatusBar, SplashScreen, ConfigActions],
   bootstrap: [AppComponent]
 })
 export class AppModule {

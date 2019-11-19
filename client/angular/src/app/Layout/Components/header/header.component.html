@@ -4,6 +4,31 @@
     <div class="app-header-left">
       <app-search-box></app-search-box>
     </div>
+    <ul class="header-menu nav">
+      <li class="nav-item">
+        <a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
+          <i class="fas fa-home"></i>
+          <span translate>Home</span>
+        </a>
+      </li>
+      <li class="btn-group nav-item">
+        <a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">
+          <i class="fas fa-question-circle"></i>
+          <span translate>About</span>
+        </a>
+      </li>
+      <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
+        <a id="language-dropdown" class="nav-item nav-link" ngbDropdownToggle>
+          <i class="nav-link-icon fa fa-cog"></i>
+          <span translate>{{ currentLanguage }}</span>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="language-dropdown">
+          <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
+            {{ language }}
+          </button>
+        </div>
+      </li>
+    </ul>
     <div class="app-header-right">
       <app-user-box></app-user-box>
     </div>

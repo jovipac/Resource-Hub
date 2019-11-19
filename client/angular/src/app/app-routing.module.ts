@@ -2,12 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 
-import { BaseLayoutComponent } from './Layout/base-layout/base-layout.component';
+import { PagesLayoutComponent } from './Layout/pages-layout/pages-layout.component';
 
 const routes: Routes = [
   Shell.childRoutes([
     { path: 'about', loadChildren: './pages/about/about.module#AboutModule' },
-    { path: 'dashboard', component: BaseLayoutComponent, data: { extraParameter: '' } }
+    {
+      path: '',
+      component: PagesLayoutComponent,
+      data: { extraParameter: '' },
+      children: [
+        // User Pages
+      ]
+    }
   ]),
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '', pathMatch: 'full' }

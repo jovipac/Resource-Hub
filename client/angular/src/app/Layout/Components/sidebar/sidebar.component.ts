@@ -33,7 +33,11 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    this.extraParameter = this.activatedRoute.snapshot.firstChild.data.extraParameter;
+    if (this.activatedRoute.snapshot.firstChild.data.extraParameter === undefined) {
+      this.extraParameter = '';
+    } else {
+      this.extraParameter = this.activatedRoute.snapshot.firstChild.data.extraParameter;
+    }
   }
 
   @HostListener('window:resize', ['$event'])
