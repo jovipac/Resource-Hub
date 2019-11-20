@@ -10,6 +10,13 @@ $api->version('v1', function($api){
 
         $api->get('assets/{uuid}/render', 'Api\Assets\RenderFileController@show');
 
+        $api->post("register", 'Api\Auth\RegisterController@register');
+        $api->get("register/{token}", 'Api\Auth\RegisterController@registerActivate');
+        $api->post("login", 'Api\Auth\LoginController@login');
+        $api->post("password/email", 'Api\Auth\PasswordResetController@createToken');
+        $api->get("password/reset/{token}", 'Api\Auth\PasswordResetController@findToken');
+        $api->post("password/reset", 'Api\Auth\PasswordResetController@reset');
+
         $api->group(['middleware' => ['auth:api'], ], function ($api) {
 
             $api->group(['prefix' => 'users'], function ($api) {

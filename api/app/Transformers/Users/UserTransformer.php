@@ -23,8 +23,10 @@ class UserTransformer extends TransformerAbstract
     {
         return [
             'id' => $model->uuid,
-            'name' => $model->name,
+            'username' => $model->name,
             'email' => $model->email,
+            'first_name' => $model->first_name,
+            'last_name' => $model->last_name,
             'created_at' => $model->created_at->toIso8601String(),
             'updated_at' => $model->updated_at->toIso8601String(),
         ];
