@@ -13,7 +13,7 @@ class RoleTransformer extends TransformerAbstract
     /**
      * @var array
      */
-    protected $defaultIncludes = ['permissions'];
+    protected $availableIncludes = ['permissions'];
 
     /**
      * @param Role $model
