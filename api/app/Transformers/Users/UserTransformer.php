@@ -4,7 +4,7 @@ namespace App\Transformers\Users;
 
 use App\Entities\User;
 use League\Fractal\TransformerAbstract;
-
+use Illuminate\Support\Facades\Crypt;
 /**
  * Class UserTransformer.
  */
@@ -23,9 +23,9 @@ class UserTransformer extends TransformerAbstract
         return [
             'id' => $model->uuid,
             'username' => $model->name,
-            'email' => $model->email,
-            'first_name' => $model->first_name,
-            'last_name' => $model->last_name,
+            'email' => !empty($model->email) ? Crypt::encryptString($model->email) : null,
+            'first_name' => !empty($model->first_name) ? Crypt::encryptString($model->first_name) : null,
+            'last_name' => !empty($model->last_name) ? Crypt::encryptString($model->last_name):null,
             'created_at' => $model->created_at->toIso8601String(),
             'updated_at' => $model->updated_at->toIso8601String(),
         ];
