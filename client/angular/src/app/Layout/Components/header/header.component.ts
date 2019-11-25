@@ -53,6 +53,6 @@ export class HeaderComponent implements OnInit {
 
   get username(): string | null {
     const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
+    return credentials ? credentials.token_type : null;
   }
 }

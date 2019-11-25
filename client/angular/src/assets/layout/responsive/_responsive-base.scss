@@ -205,7 +205,8 @@
 
   .app-header.text-lighter {
     .logo-src {
-      background: url("./assets/images/logo.png");
+      background-image: url("./assets/images/logo.png");
+      background-repeat: no-repeat;
     }
 
     .app-header__menu {

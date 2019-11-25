@@ -2,10 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule, Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterState, StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { rootReducer, ArchitectUIState } from './ThemeOptions/store';
+import { ArchitectUIState } from './ThemeOptions/store';
 import { ConfigActions } from './ThemeOptions/store/config.actions';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -17,6 +18,8 @@ import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { environment } from '@env/environment';
+import { reducers, metaReducers } from './reducers';
+import { CustomRouterStateSerializer } from './shared/utils';
 
 // BOOTSTRAP COMPONENTS
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -37,18 +40,22 @@ import { AppRoutingModule } from './app-routing.module';
     TranslateModule.forRoot(),
     BrowserAnimationsModule,
     LoadingBarRouterModule,
-    StoreModule.forRoot(
-      {},
-      {
-        metaReducers: !environment.production ? [] : [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true
-        }
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictStateImmutability: true
       }
-    ),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+    }),
+    StoreRouterConnectingModule.forRoot({
+      routerState: RouterState.Minimal,
+      stateKey: 'router'
+    }),
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx App Store DevTools',
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([]),
     // Angular Bootstrap Components
     NgbModule,
     AngularFontAwesomeModule,
@@ -65,9 +72,13 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],
-  providers: [Keyboard, StatusBar, SplashScreen, ConfigActions],
+  providers: [
+    Keyboard,
+    StatusBar,
+    SplashScreen,
+    ConfigActions,
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private ngRedux: Store<ArchitectUIState>) {}
-}
+export class AppModule {}

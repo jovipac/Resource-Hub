@@ -74,7 +74,7 @@ describe('AuthenticationService', () => {
       const request = authenticationService.login({
         username: 'toto',
         password: '123',
-        remember: true
+        remember_me: true
       });
       tick();
 

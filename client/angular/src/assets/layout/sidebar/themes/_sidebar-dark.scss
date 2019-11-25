@@ -11,7 +11,8 @@
     }
 
     .logo-src {
-      background: url("/assets/images/logo-inverse.png");
+      background-image: url("/assets/images/logo-inverse.png");
+      background-repeat: no-repeat;
     }
 
     .hamburger-inner,

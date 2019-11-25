@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { CredentialsService, Credentials } from './credentials.service';
 
-const credentialsKey = 'credentials';
+const authCredentialsKey = 'credentials';
 
 describe('CredentialsService', () => {
   let credentialsService: CredentialsService;
@@ -17,8 +17,8 @@ describe('CredentialsService', () => {
 
   afterEach(() => {
     // Cleanup
-    localStorage.removeItem(credentialsKey);
-    sessionStorage.removeItem(credentialsKey);
+    localStorage.removeItem(authCredentialsKey);
+    sessionStorage.removeItem(authCredentialsKey);
   });
 
   describe('setCredentials', () => {
@@ -44,8 +44,8 @@ describe('CredentialsService', () => {
       credentialsService.setCredentials({ username: 'me', token: '123' });
 
       // Assert
-      expect(sessionStorage.getItem(credentialsKey)).not.toBeNull();
-      expect(localStorage.getItem(credentialsKey)).toBeNull();
+      expect(sessionStorage.getItem(authCredentialsKey)).not.toBeNull();
+      expect(localStorage.getItem(authCredentialsKey)).toBeNull();
     });
 
     it('should persist credentials across sessions', () => {
@@ -53,8 +53,8 @@ describe('CredentialsService', () => {
       credentialsService.setCredentials({ username: 'me', token: '123' }, true);
 
       // Assert
-      expect(localStorage.getItem(credentialsKey)).not.toBeNull();
-      expect(sessionStorage.getItem(credentialsKey)).toBeNull();
+      expect(localStorage.getItem(authCredentialsKey)).not.toBeNull();
+      expect(sessionStorage.getItem(authCredentialsKey)).toBeNull();
     });
 
     it('should clear user authentication', () => {
@@ -64,8 +64,8 @@ describe('CredentialsService', () => {
       // Assert
       expect(credentialsService.isAuthenticated()).toBe(false);
       expect(credentialsService.credentials).toBeNull();
-      expect(sessionStorage.getItem(credentialsKey)).toBeNull();
-      expect(localStorage.getItem(credentialsKey)).toBeNull();
+      expect(sessionStorage.getItem(authCredentialsKey)).toBeNull();
+      expect(localStorage.getItem(authCredentialsKey)).toBeNull();
     });
   });
 });

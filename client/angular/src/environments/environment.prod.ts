@@ -10,8 +10,9 @@ export const environment = {
   production: true,
   hmr: false,
   version: env.npm_package_version,
-  serverUrl: 'https://api.chucknorris.io',
+  serverUrl: 'https://localhost',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR'],
-  app_key: 'JqyMTmt5qr1CW6BH+GG+4iKfU4RiNjZTLy33TdTT7+4='
+  app_key: 'JqyMTmt5qr1CW6BH+GG+4iKfU4RiNjZTLy33TdTT7+4=',
+  client_secret: 'Tg0wQwbfGKfifMVr2xvgJfTXEpa80B80yge7CY1L'
 };
