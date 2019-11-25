@@ -18,9 +18,8 @@ $factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
+        'username' => $faker->userName,
+        'name' => $faker->firstName . ' '. $faker->lastName,
         'uuid' => $faker->uuid,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),

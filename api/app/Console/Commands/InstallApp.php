@@ -40,11 +40,13 @@ class InstallApp extends Command
     {
         $service = app(AppInstallationService::class);
         $this->info('Welcome to the Installer, please provide the following information');
-        $name = $this->ask('What is the Admininstrator\'s name?');
+        $username = $this->ask('What is the Admininstrator\'s username?');
+        $name = $this->ask('What is the Admininstrator\'s name?');     
         $email = $this->ask('What is the Admininstrator\'s email?');
         $password = $this->ask('What is the Admininstrator\'s password?');
         $this->info('Installing the app');
         $service->installApp([
+            'username' => $username,
             'name' => $name,
             'email' => $email,
             'password' => $password,

@@ -10,6 +10,10 @@ class InstallAppCommand
     /**
      * @var
      */
+    public $username;
+    /**
+     * @var
+     */
     public $name;
 
     /**
@@ -30,17 +34,19 @@ class InstallAppCommand
     /**
      * InstallAppCommand constructor.
      *
-     * @param $name
+     * @param $username
      * @param $email
      * @param $password
      * @param $password_confirmation
      */
     public function __construct(
+        $username = 'root',
         $name = 'Administrator',
         $email = 'admin@admin.com',
         $password = 'secret1234',
         $password_confirmation = 'secret1234'
     ) {
+        $this->username = $username;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;

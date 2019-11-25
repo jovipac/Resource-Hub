@@ -39,6 +39,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'uuid',
         'email',
         'password',
@@ -72,6 +73,14 @@ class User extends Authenticatable
         return $model;
     }
 
+    /**
+     * @param array $identifier
+     * @return \Illuminate\Database\Eloquent\Model
+     */    
+    public function findForPassport($identifier) {
+        return $this->orWhere('email', $identifier)->orWhere('username', $identifier)->first();
+    }
+    
     /**
      *  Add the one to many relationship to profiles into the User model:
      * @return profile

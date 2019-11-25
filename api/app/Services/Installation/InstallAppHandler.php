@@ -103,7 +103,7 @@ class InstallAppHandler
     public function createAdminUser(array $attributes = [])
     {
         $validator = validator($attributes, [
-            'name' => 'required',
+            'username' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ]);
@@ -112,6 +112,7 @@ class InstallAppHandler
         }
         $this->adminUser = User::create([
             'name' => $attributes['name'],
+            'username' => $attributes['username'],
             'email' => $attributes['email'],
             'password' => $attributes['password'],
         ]);

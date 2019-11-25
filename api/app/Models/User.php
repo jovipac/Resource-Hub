@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
@@ -37,13 +37,13 @@ class User extends Authenticatable
      */
     protected static $graph_node_field_aliases = [
       //'id' => 'password',
-        'name' => 'name',
+        'username' => 'username',
         'email' => 'email',
         'first_name' => 'first_name',
         'last_name' => 'last_name'
     ];
 
-    protected static $graph_node_fillable_fields = ['name', 'email','first_name','last_name'];
+    protected static $graph_node_fillable_fields = ['username', 'email','first_name','last_name'];
     
     /**
      * Find the user identified by the given $identifier.
@@ -52,7 +52,7 @@ class User extends Authenticatable
      * @return mixed
      */
     public function findForPassport($identifier) {
-        return User::orWhere('email', $identifier)->orWhere('name', $identifier)->first();
+        return User::orWhere('email', $identifier)->orWhere('username', $identifier)->first();
     }
 
 

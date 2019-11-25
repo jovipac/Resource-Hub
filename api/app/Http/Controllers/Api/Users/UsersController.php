@@ -71,7 +71,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'username' => 'required|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ]);
@@ -92,12 +92,12 @@ class UsersController extends Controller
     {
         $user = $this->model->byUuid($uuid)->firstOrFail();
         $rules = [
-            'name' => 'required',
+            'username' => 'required|unique:users,username',
             'email' => 'required|email|unique:users,email,'.$user->id,
         ];
         if ($request->method() == 'PATCH') {
             $rules = [
-                'name' => 'sometimes|required',
+                'username' => 'sometimes|required',
                 'email' => 'sometimes|required|email|unique:users,email,'.$user->id,
             ];
         }

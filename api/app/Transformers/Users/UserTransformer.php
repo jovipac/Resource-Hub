@@ -22,12 +22,13 @@ class UserTransformer extends TransformerAbstract
     {
         return [
             'id' => $model->uuid,
-            'username' => $model->name,
+            'username' => $model->username,
+            'name' => !empty($model->name) ? Crypt::encryptString($model->name) : null,
             'email' => !empty($model->email) ? Crypt::encryptString($model->email) : null,
             'first_name' => !empty($model->first_name) ? Crypt::encryptString($model->first_name) : null,
             'last_name' => !empty($model->last_name) ? Crypt::encryptString($model->last_name):null,
-            'created_at' => $model->created_at->toIso8601String(),
-            'updated_at' => $model->updated_at->toIso8601String(),
+            'created_at' => !empty($model->created_at) ? $model->created_at->toIso8601String() : null,
+            'updated_at' => !empty($model->updated_at) ? $model->updated_at->toIso8601String() : null,
         ];
     }
 

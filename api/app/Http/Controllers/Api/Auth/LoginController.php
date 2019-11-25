@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Api\DingoController;
 use App\Transformers\NullObjectTransformer;
 use App\Transformers\Users\UserTransformer;
+use App\Transformers\CredentialTransformer;
 use App\Models\NullObject;
 use App\Entities\User;
 use Dingo\Api\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class LoginController extends DingoController
 {
     /**
@@ -33,7 +34,7 @@ class LoginController extends DingoController
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required|string|email',
+            $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
     }
@@ -72,6 +73,34 @@ class LoginController extends DingoController
     protected function sendLoginResponse(Request $request)
     {
         $inputs = $request->all();
+        $user = User::select('uuid','username','name','email')->where($this->username(), $inputs[$this->username()])->firstOrFail();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        if ($request->remember_me == false)
+            $token->expires_at = Carbon::now()->addWeeks(1);
+        $token->save();
+        $meta = array(
+            'token_type' => 'Bearer',
+            'access_token' => $tokenResult->accessToken,
+            'expires_in' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->diffInSeconds(),
+            'expires_at' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->toDateTimeString(),
+            'status_code' => 200,
+            'status_text' => "OK",
+            'message' => trans("auth.login.success"),
+        );
+        $response = $this->response->item($user, new CredentialTransformer())
+            ->setStatusCode(200)
+            ->setMeta($meta);
+        
+        $response->throwResponse();
+    }
+     protected function sendLoginResponse2(Request $request)
+    {
+        $inputs = $request->all();
         $user = User::where($this->username(), $inputs[$this->username()])->firstOrFail();
         $meta = array(
             'status_code' => 200,
@@ -84,6 +113,27 @@ class LoginController extends DingoController
         
         $response->throwResponse();
     }
+    protected function sendLoginResponse3(Request $request)
+    {
+        $inputs = $request->all();
+        $user = User::select('id','username','name')
+            ->where($this->username(), $inputs[$this->username()])
+            ->firstOrFail();
+
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        if ($request->remember_me)
+            $token->expires_at = Carbon::now()->addWeeks(1);
+        $token->save();            
+
+        $response = $this->response
+        ->json([
+            'status' => 'ok',
+            'token' => $token,
+            'expires_in' => $token->expires_at
+        ]);
+        //$response->throwResponse();
+    }    
     /**
      * The user has been authenticated.
      *
@@ -112,7 +162,7 @@ class LoginController extends DingoController
      */
     public function username()
     {
-        return 'email';
+        return 'username';
     }
     /**
      * Log the user out of the application.
