@@ -58,7 +58,7 @@ export class UserService {
   }
 
   crearUsuario(usuario: User) {
-    return this.http.post(`/usuario`, usuario).pipe(
+    return this.http.post(`/api/users`, usuario).pipe(
       map((resp: any) => {
         Swal.fire('Usuario creado', usuario.email, 'success');
         return resp.usuario;
@@ -83,16 +83,23 @@ export class UserService {
   }
 
   cargarUsuarios(desde: number = 0) {
-    const url = `/usuario?desde=${desde}`;
-    return this.http.get(url);
+    const headers = new HttpHeaders({
+      Accept: 'application/vnd.api.v1+json',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'false',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept'
+    });
+    const url = `/api/users?page=${desde}`;
+    return this.http.get(url, { headers });
   }
 
   buscarUsuarios(termino: string) {
-    return this.http.get(`/busqueda/coleccion/usuarios/${termino}`).pipe(map((resp: any) => resp.usuarios));
+    return this.http.get(`/api/users/${termino}`).pipe(map((resp: any) => resp.usuarios));
   }
 
   borrarUsuario(id: string) {
-    let url = `/usuario/${id}`;
+    let url = `/api/users${id}`;
     url += '?token=' + this.token;
 
     return this.http.delete(url).pipe(

@@ -7,13 +7,12 @@ import { PagesLayoutComponent } from './Layout/pages-layout/pages-layout.compone
 const routes: Routes = [
   Shell.childRoutes([
     { path: 'about', loadChildren: './pages/about/about.module#AboutModule' },
+    { path: 'users', loadChildren: './pages/user/user.module#UserModule' },
     {
       path: '',
       component: PagesLayoutComponent,
       data: { extraParameter: '' },
-      children: [
-        // User Pages
-      ]
+      children: []
     }
   ]),
   // Fallback when no prior route is matched
