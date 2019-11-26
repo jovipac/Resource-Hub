@@ -8,7 +8,6 @@ import { MockAuthenticationService } from '@app/core/authentication/authenticati
 import { MockCredentialsService } from '@app/core/authentication/credentials.service.mock';
 
 import { ShellComponent } from './shell.component';
-import { HeaderComponent } from './header/header.component';
 
 describe('ShellComponent', () => {
   let component: ShellComponent;
@@ -21,7 +20,7 @@ describe('ShellComponent', () => {
         { provide: AuthenticationService, useClass: MockAuthenticationService },
         { provide: CredentialsService, useClass: MockCredentialsService }
       ],
-      declarations: [HeaderComponent, ShellComponent]
+      declarations: [ShellComponent]
     }).compileComponents();
   }));
 
