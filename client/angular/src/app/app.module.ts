@@ -30,7 +30,6 @@ import { SharedModule } from '@app/shared';
 import { HomeModule } from './pages/home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { LoginModule } from './pages/login/login.module';
-import { UserModule } from './pages/user/user.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -69,7 +68,6 @@ import { AppRoutingModule } from './app-routing.module';
     ShellModule,
     HomeModule,
     LoginModule,
-    UserModule,
     Angulartics2Module.forRoot(),
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],

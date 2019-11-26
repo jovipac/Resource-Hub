@@ -3,18 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from '@app/core';
 import { UserComponent } from './user.component';
-import { Shell } from '@app/shell/shell.service';
 
 const routes: Routes = [
-  Shell.childRoutes([
-    {
-      path: '',
-      component: UserComponent,
-      data: {
-        title: 'Usuarios'
-      }
-    }
-  ])
+  // Module is lazy loaded, see app-routing.module.ts
+  { path: '', component: UserComponent, data: { title: extract('Usuarios') } }
 ];
 
 @NgModule({
