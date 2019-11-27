@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="row animated fadeIn" *ngIf="cargando">
+<div class="row animated fadeIn" *ngIf="isLoading">
     <div class="col-sm-12">
         <div class="alert alert-warning text-center">
             <strong>Cargando</strong>
@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<div class="row animated fadeIn" *ngIf="!cargando">
+<div class="row animated fadeIn" *ngIf="!isLoading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -74,13 +74,23 @@
                     </tbody>
                 </table>
 
-                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
-                    Anteriores
-                </button>
-
-                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
-                    Siguientes
-                </button>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <button
+                                (click)="cambiarDesde(-5)"
+                                class="page-link"
+                            >
+                                Anteriores
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button (click)="cambiarDesde(5)" class="page-link">
+                                Siguientes
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

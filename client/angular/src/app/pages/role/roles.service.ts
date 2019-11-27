@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { take, tap, switchMap, map, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Users, UserEntity } from './users.model';
+import { Roles, RoleEntity } from './roles.model';
 import { CredentialsService } from '../../core/authentication/credentials.service';
 import { Logger, I18nService } from '@app/core';
 
@@ -11,13 +11,13 @@ import { environment } from '@env/environment';
 import { UtilsService } from '../../core/utils.service';
 import Swal from 'sweetalert2';
 
-const log = new Logger('Usuarios');
+const log = new Logger('Roles');
 @Injectable({
     providedIn: 'root'
 })
-export class UsersService {
-    usuario: Users;
-    private _users = new BehaviorSubject<UserEntity[]>([]);
+export class RolesService {
+    rol: Roles;
+    private _roles = new BehaviorSubject<RoleEntity[]>([]);
 
     constructor(
         private credentialService: CredentialsService,
@@ -26,32 +26,7 @@ export class UsersService {
         private utilsService: UtilsService
     ) {}
 
-    crearUsuario(usuario: Users) {
-        return this.http.post(`/api/users`, usuario).pipe(
-            map((resp: any) => {
-                Swal.fire('Usuario creado', usuario.email, 'success');
-                return resp.usuario;
-            })
-        );
-    }
-    /*
-    actualizarUsuario(usuario: Users) {
-        let url = `/usuario/${usuario.id}`;
-        url += '?token=' + this.token;
-
-        return this.http.put(url, usuario).pipe(
-            map((resp: any) => {
-                if (usuario.id === this.usuario.id) {
-                    let usuarioDB: Users = resp.usuario;
-                }
-                Swal.fire('Usuario actualizado', usuario.name, 'success');
-
-                return true;
-            })
-        );
-    }
-*/
-    cargarUsuarios(desde: number = 0) {
+    cargarRoles(desde: number = 0) {
         return this.credentialService.token.pipe(
             take(1),
             switchMap(token => {
@@ -67,58 +42,47 @@ export class UsersService {
                         'Origin, Content-Type, Accept, Authorization'
                 });
 
-                return this.http.get<{ [key: string]: UserEntity }>(
-                    `/api/users?page=${desde}`,
+                return this.http.get<{ [key: string]: RoleEntity }>(
+                    `/api/roles?page=${desde}`,
                     { headers }
                 );
             }),
-            tap(users => {
-                console.log(users);
+            tap(roles => {
+                console.log(roles);
             }),
             map(resData => {
-                const users = [];
+                const roles = [];
                 const itemData = resData.data;
                 for (const key in itemData) {
                     if (itemData.hasOwnProperty(key)) {
                         const decodeKey = environment.app_key;
 
-                        users.push(
-                            new UserEntity(
+                        roles.push(
+                            new RoleEntity(
                                 itemData[key].id,
                                 this.utilsService.decryptAES(
                                     decodeKey,
-                                    itemData[key].username
-                                ),
-                                this.utilsService.decryptAES(
-                                    decodeKey,
                                     itemData[key].name
-                                ),
-                                itemData[key].first_name,
-                                itemData[key].last_name,
-                                this.utilsService.decryptAES(
-                                    decodeKey,
-                                    itemData[key].email
-                                ),
-                                itemData[key].created_at
+                                )
                             )
                         );
                     }
                 }
-                return users;
+                return roles;
             }),
-            tap(users => {
-                this._users.next(users);
+            tap(roles => {
+                this._roles.next(roles);
             })
         );
     }
 
-    buscarUsuarios(termino: string) {
+    buscarRoles(termino: string) {
         return this.http
-            .get(`/api/users/${termino}`)
-            .pipe(map((resp: any) => resp.usuarios));
+            .get(`/api/roles/${termino}`)
+            .pipe(map((resp: any) => resp.roles));
     }
 
-    borrarUsuario(id: string) {
+    borrarRole(id: string) {
         return this.credentialService.token.pipe(
             take(1),
             switchMap(token => {
@@ -134,12 +98,12 @@ export class UsersService {
                         'Origin, Content-Type, Accept, Authorization'
                 });
 
-                return this.http.delete(`/api/users/${id}`, { headers });
+                return this.http.delete(`/api/roles/${id}`, { headers });
             }),
             map((resp: any) => {
                 Swal.fire(
-                    'Usuario borrado',
-                    'El usuario a sido eliminado correctamente',
+                    'Rol borrado',
+                    'El rol a sido eliminado correctamente',
                     'success'
                 );
                 return true;

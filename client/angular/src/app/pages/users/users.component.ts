@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
-import { Users, UserEntity } from './users.model';
+import { Users } from './users.model';
 
 import Swal from 'sweetalert2';
 
@@ -14,25 +14,23 @@ export class UsersComponent implements OnInit {
     desde: number = 0;
 
     totalRegistros: number = 0;
-    cargando: boolean = true;
+    isLoading: boolean = true;
 
-    constructor(
-        public _usuarioService: UsersService //public _modalUploadService: ModalUploadService
-    ) {}
+    constructor(public _usuarioService: UsersService) {}
 
     ngOnInit() {
         this.cargarUsuarios();
     }
 
     cargarUsuarios() {
-        this.cargando = true;
+        this.isLoading = true;
 
         this._usuarioService
             .cargarUsuarios(this.desde)
             .subscribe((resp: any) => {
                 this.totalRegistros = resp.total;
                 this.usuarios = resp;
-                this.cargando = false;
+                this.isLoading = false;
             });
     }
 
@@ -57,33 +55,25 @@ export class UsersComponent implements OnInit {
             return;
         }
 
-        this.cargando = true;
+        this.isLoading = true;
 
         this._usuarioService
             .buscarUsuarios(termino)
             .subscribe((usuarios: Users[]) => {
                 this.usuarios = usuarios;
-                this.cargando = false;
+                this.isLoading = false;
             });
     }
 
     borrarUsuario(usuario: Users) {
-        if (usuario.id === this._usuarioService.usuario.id) {
-            Swal.fire(
-                'No puede borrar usuario',
-                'No se puede borrar a si mismo',
-                'error'
-            );
-            return;
-        }
-
         Swal.fire({
             title: '¿Esta seguro?',
             text: 'Esta a punto de borrar a ' + usuario.name,
             type: 'error',
-            confirmButtonText: 'Cool'
-        }).then(borrar => {
-            if (borrar) {
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar'
+        }).then(result => {
+            if (result.value) {
                 this._usuarioService
                     .borrarUsuario(usuario.id)
                     .subscribe(borrado => {
@@ -92,8 +82,9 @@ export class UsersComponent implements OnInit {
             }
         });
     }
-
+    /*
     guardarUsuario(usuario: Users) {
         this._usuarioService.actualizarUsuario(usuario).subscribe();
     }
+    */
 }

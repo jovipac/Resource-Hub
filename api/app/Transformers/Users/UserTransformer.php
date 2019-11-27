@@ -22,7 +22,7 @@ class UserTransformer extends TransformerAbstract
     {
         return [
             'id' => $model->uuid,
-            'username' => $model->username,
+            'username' => !empty($model->username) ? Crypt::encryptString($model->username) : null,
             'name' => !empty($model->name) ? Crypt::encryptString($model->name) : null,
             'email' => !empty($model->email) ? Crypt::encryptString($model->email) : null,
             'first_name' => !empty($model->first_name) ? Crypt::encryptString($model->first_name) : null,
