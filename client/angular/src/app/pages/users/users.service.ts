@@ -4,9 +4,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { take, tap, switchMap, map } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
-import { Users, UserModel } from './users.model';
+import { Users, UserEntity } from './users.model';
 import { CredentialsService } from '../../core/authentication/credentials.service';
 
+import { environment } from '@env/environment';
+import { UtilsService } from '../../core/utils.service';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -16,12 +18,13 @@ export class UsersService {
     usuario: Users;
     token: string;
     menu: any[] = [];
-    private _branches = new BehaviorSubject<UserModel[]>([]);
+    private _branches = new BehaviorSubject<UserEntity[]>([]);
 
     constructor(
         private credentialService: CredentialsService,
         public http: HttpClient,
-        public router: Router
+        public router: Router,
+        private utilsService: UtilsService
     ) {
         this.cargarStorage();
     }
@@ -89,19 +92,7 @@ export class UsersService {
             })
         );
     }
-    /*
-  cargarUsuarios(desde: number = 0) {
-    const headers = new HttpHeaders({
-      Accept: 'application/vnd.api.v1+json',
-      'Content-Type': 'application/json; charset=utf-8',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'false',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept'
-    });
-    const url = `/api/users?page=${desde}`;
-    return this.http.get(url, { headers });
-  }
-*/
+
     cargarUsuarios(desde: number = 0) {
         return this.credentialService.token.pipe(
             take(1),
@@ -118,33 +109,41 @@ export class UsersService {
                         'Origin, Content-Type, Accept, Authorization'
                 });
 
-                return this.http.get<{ [key: string]: Users }>(
+                return this.http.get<{ [key: string]: UserEntity }>(
                     `/api/users?page=${desde}`,
                     { headers }
                 );
             }),
-            tap(branches => {
-                console.log(branches);
+            tap(users => {
+                console.log(users);
             }),
             map(resData => {
-                const branches = [];
-                for (const key in resData) {
-                    if (resData.hasOwnProperty(key)) {
-                        branches.push(
-                            new UserModel(
-                                resData[key].id,
-                                resData[key].username,
-                                resData[key].name,
-                                resData[key].email,
-                                resData[key].created_at
+                const users = [];
+                const itemData = resData.data;
+                for (const key in itemData) {
+                    if (itemData.hasOwnProperty(key)) {
+                        const decryptData = this.utilsService.decryptAES(
+                            environment.app_key,
+                            itemData[key].email
+                        );
+                        console.log(decryptData);
+                        users.push(
+                            new UserEntity(
+                                itemData[key].id,
+                                itemData[key].username,
+                                itemData[key].name,
+                                itemData[key].email,
+                                itemData[key].first_name,
+                                itemData[key].last_name,
+                                itemData[key].created_at
                             )
                         );
                     }
                 }
-                return branches;
+                return users;
             }),
-            tap(branches => {
-                this._branches.next(branches);
+            tap(users => {
+                this._branches.next(users);
             })
         );
     }
