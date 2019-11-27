@@ -122,19 +122,25 @@ export class UsersService {
                 const itemData = resData.data;
                 for (const key in itemData) {
                     if (itemData.hasOwnProperty(key)) {
-                        const decryptData = this.utilsService.decryptAES(
-                            environment.app_key,
-                            itemData[key].email
-                        );
-                        console.log(decryptData);
+                        const decodeKey = environment.app_key;
+
                         users.push(
                             new UserEntity(
                                 itemData[key].id,
-                                itemData[key].username,
-                                itemData[key].name,
-                                itemData[key].email,
+                                this.utilsService.decryptAES(
+                                    decodeKey,
+                                    itemData[key].username
+                                ),
+                                this.utilsService.decryptAES(
+                                    decodeKey,
+                                    itemData[key].name
+                                ),
                                 itemData[key].first_name,
                                 itemData[key].last_name,
+                                this.utilsService.decryptAES(
+                                    decodeKey,
+                                    itemData[key].email
+                                ),
                                 itemData[key].created_at
                             )
                         );

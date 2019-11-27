@@ -48,12 +48,8 @@
 
                     <tbody>
                         <tr *ngFor="let usuario of usuarios">
-                            <td>
-                                {{ usuario.id }}
-                            </td>
-                            <td>
-                                {{ usuario.username }}
-                            </td>
+                            <td>{{ usuario.id }}</td>
+                            <td>{{ usuario.username }}</td>
                             <td>{{ usuario.name }}</td>
                             <td>{{ usuario.email }}</td>
                             <td>
@@ -71,7 +67,7 @@
                                     (click)="borrarUsuario(usuario)"
                                     class="btn btn-danger"
                                 >
-                                    <i class="fa fa-trash-o"></i>
+                                    <i class="fa fa-trash-alt"></i>
                                 </button>
                             </td>
                         </tr>
