@@ -27,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
+import { ToastrModule } from 'ngx-toastr';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { LoginModule } from './login/login.module';
@@ -64,6 +65,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
 
     CoreModule,
+    ToastrModule.forRoot(),
     SharedModule,
     ShellModule,
     HomeModule,

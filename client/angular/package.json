@@ -67,6 +67,7 @@
     "moment": "^2.24.0",
     "ngx-avatar": "^3.7.0",
     "ngx-perfect-scrollbar": "^8.0.0",
+    "ngx-toastr": "^11.2.1",
     "pe7-icon": "^1.0.4",
     "ramda": "^0.26.1",
     "redux": "^4.0.3",

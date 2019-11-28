@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
+import { ToastrService } from 'ngx-toastr';
 import { Logger } from '../logger.service';
 
 const log = new Logger('ErrorHandlerInterceptor');
@@ -15,6 +16,8 @@ const log = new Logger('ErrorHandlerInterceptor');
   providedIn: 'root'
 })
 export class ErrorHandlerInterceptor implements HttpInterceptor {
+  constructor(public toasterService: ToastrService) {}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(error => this.errorHandler(error)));
   }

@@ -13,6 +13,6 @@ export const environment = {
   serverUrl: 'https://localhost',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR'],
-  app_key: 'JqyMTmt5qr1CW6BH+GG+4iKfU4RiNjZTLy33TdTT7+4=',
+  app_key: 'NoM3tQNQUW2StLUvZb+YD2N47hmRB/u97IiAd+4uvW8=',
   client_secret: 'gyYReY3GqVZCY7Bcme6tNetWDJlr9ypDA6WNpK8u'
 };
