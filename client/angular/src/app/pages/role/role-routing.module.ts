@@ -6,18 +6,18 @@ import { extract } from '@app/core';
 import { RoleComponent } from './role.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: RoleComponent,
-    canLoad: [AuthenticationGuard],
-    data: {
-      title: extract('Certificados de Nacimiento')
+    {
+        path: '',
+        component: RoleComponent,
+        canLoad: [AuthenticationGuard],
+        data: {
+            title: extract('Certificados de Nacimiento')
+        }
     }
-  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class RoleRoutingModule {}

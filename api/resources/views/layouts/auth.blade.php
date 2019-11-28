@@ -9,7 +9,7 @@
 
     <div style="margin-top: 10%;"></div>
 
-    <div class="container-fluid">
+    <div id="app" class="container-fluid">
         @yield('content')
     </div>
 
