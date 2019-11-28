@@ -11,7 +11,7 @@ const routes: Routes = [
         component: RoleComponent,
         canLoad: [AuthenticationGuard],
         data: {
-            title: extract('Certificados de Nacimiento')
+            title: extract('Roles')
         }
     }
 ];

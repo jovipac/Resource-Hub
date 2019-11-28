@@ -14,6 +14,7 @@ import { ShellComponent } from './shell.component';
 import { AvatarModule } from 'ngx-avatar';
 // LAYOUT
 import { BaseLayoutComponent } from '../Layout/base-layout/base-layout.component';
+import { PagesLayoutComponent } from '../Layout/pages-layout/pages-layout.component';
 import { PageTitleComponent } from '../Layout/Components/page-title/page-title.component';
 // HEADER
 import { HeaderComponent } from '../Layout/Components/header/header.component';
@@ -45,6 +46,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   declarations: [
     // LAYOUT
     BaseLayoutComponent,
+    PagesLayoutComponent,
     PageTitleComponent,
     // HEADER
     HeaderComponent,

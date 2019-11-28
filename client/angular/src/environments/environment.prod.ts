@@ -10,9 +10,9 @@ export const environment = {
   production: true,
   hmr: false,
   version: env.npm_package_version,
-  serverUrl: 'https://localhost',
+  serverUrl: 'https://localhost:8000',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR'],
-  app_key: 'NoM3tQNQUW2StLUvZb+YD2N47hmRB/u97IiAd+4uvW8=',
-  client_secret: 'gyYReY3GqVZCY7Bcme6tNetWDJlr9ypDA6WNpK8u'
+  app_key: 'JqyMTmt5qr1CW6BH+GG+4iKfU4RiNjZTLy33TdTT7+4=',
+  client_secret: 'Tg0wQwbfGKfifMVr2xvgJfTXEpa80B80yge7CY1L'
 };
