@@ -37,7 +37,7 @@ export class UtilsService {
         return decipher.toString(CryptoJS.enc.Utf8);
       } catch (error) {
         log.debug(error);
-        return '';
+        return data;
       }
     } else {
       return '';
